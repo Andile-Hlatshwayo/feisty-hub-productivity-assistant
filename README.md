@@ -88,34 +88,32 @@ These include:
 
 ## Technologies
 
+Feisty Hub is built using a modern web development stack that combines frontend technologies with a PostgreSQL-based backend and AI-powered services.
+
 ### Frontend
 
-* React
-* TypeScript
-* Tailwind CSS
+* **TypeScript** – Provides type safety and improves code quality, maintainability, and scalability.
+* **JavaScript** – Supports client-side functionality and application logic.
+* **CSS** – Styles the user interface, ensuring a responsive, accessible, and visually appealing experience.
 
 ### Backend
 
-* Lovable Cloud
-* REST APIs
-* MVC Architecture
+* **PL/pgSQL** – Used to create PostgreSQL functions, procedures, and database logic that support the application's operations.
 
 ### Database
 
-* PostgreSQL
+* **PostgreSQL** – A relational database used to securely store user accounts, application data, AI-generated content, tasks, documents, and user preferences.
 
-### Authentication
+### Authentication & Storage
 
-* Email and Password Authentication
-* Google Sign-In (optional)
+* **Lovable Cloud Authentication** – Provides secure user registration, login, and account management.
+* **Lovable Cloud Storage** – Stores uploaded files and documents securely.
 
 ### Artificial Intelligence
 
-* Gemini AI through the Lovable AI Gateway
-
-### Storage
-
-* Lovable Cloud Storage
+* **Gemini AI (via Lovable AI Gateway)** – Powers intelligent features such as email generation, document and meeting summarization, research assistance, task planning, and workflow automation.
+* **ChatGPT** – Assists with natural language understanding, email drafting, conversational interactions, task planning, and content generation.
+* **Perplexity AI** – Enhances research capabilities by retrieving, summarizing, and synthesizing information from reliable online sources, helping users quickly find accurate and relevant information.
 
 ---
 
