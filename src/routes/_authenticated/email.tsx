@@ -54,7 +54,7 @@ function EmailPage() {
       if (!u.user) throw new Error("Not authenticated");
       const { error } = await supabase.from("emails").insert({
         user_id: u.user.id,
-        subject, body, recipient, tone, length, prompt,
+        subject, body, recipient, tone, prompt,
         status: "draft",
       });
       if (error) throw error;
