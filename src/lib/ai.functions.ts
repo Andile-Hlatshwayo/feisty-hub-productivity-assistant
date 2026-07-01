@@ -100,7 +100,6 @@ export const askKnowledge = createServerFn({ method: "POST" })
     const { data: matches, error } = await context.supabase.rpc("match_document_chunks", {
       query_embedding: `[${qvec.join(",")}]` as unknown as string,
       match_count: 6,
-      filter_user: context.userId,
     });
     if (error) throw new Error(error.message);
     const ctx = (matches ?? []).map((m: { chunk_text: string }, i: number) => `[${i + 1}] ${m.chunk_text}`).join("\n\n");
