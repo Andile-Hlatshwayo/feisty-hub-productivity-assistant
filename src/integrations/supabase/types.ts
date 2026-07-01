@@ -508,11 +508,7 @@ export type Database = {
         Returns: boolean
       }
       match_document_chunks: {
-        Args: {
-          filter_user?: string
-          match_count?: number
-          query_embedding: string
-        }
+        Args: { match_count?: number; query_embedding: string }
         Returns: {
           chunk_text: string
           document_id: string
