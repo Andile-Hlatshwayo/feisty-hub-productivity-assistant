@@ -375,28 +375,34 @@ export type Database = {
           avatar_url: string | null
           created_at: string
           default_tone: string | null
+          disabled: boolean
           full_name: string | null
           id: string
           timezone: string | null
           updated_at: string
+          username: string | null
         }
         Insert: {
           avatar_url?: string | null
           created_at?: string
           default_tone?: string | null
+          disabled?: boolean
           full_name?: string | null
           id: string
           timezone?: string | null
           updated_at?: string
+          username?: string | null
         }
         Update: {
           avatar_url?: string | null
           created_at?: string
           default_tone?: string | null
+          disabled?: boolean
           full_name?: string | null
           id?: string
           timezone?: string | null
           updated_at?: string
+          username?: string | null
         }
         Relationships: []
       }
@@ -424,6 +430,30 @@ export type Database = {
           sources?: Json | null
           summary?: string | null
           user_id?: string
+        }
+        Relationships: []
+      }
+      site_settings: {
+        Row: {
+          access_enabled: boolean
+          disabled_message: string | null
+          id: boolean
+          updated_at: string
+          updated_by: string | null
+        }
+        Insert: {
+          access_enabled?: boolean
+          disabled_message?: string | null
+          id?: boolean
+          updated_at?: string
+          updated_by?: string | null
+        }
+        Update: {
+          access_enabled?: boolean
+          disabled_message?: string | null
+          id?: boolean
+          updated_at?: string
+          updated_by?: string | null
         }
         Relationships: []
       }
