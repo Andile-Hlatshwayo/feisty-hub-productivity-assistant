@@ -117,8 +117,12 @@ export const setSiteAccess = createServerFn({ method: "POST" })
   .handler(async ({ data, context }) => {
     const { data: isAdmin } = await context.supabase.rpc("has_role", { _user_id: context.userId, _role: "admin" });
     if (!isAdmin) throw new Error("Forbidden");
-    const update: Record<string, unknown> = { access_enabled: data.enabled, updated_at: new Date().toISOString(), updated_by: context.userId };
-    if (typeof data.message === "string") update.disabled_message = data.message;
+    const update = {
+      access_enabled: data.enabled,
+      updated_at: new Date().toISOString(),
+      updated_by: context.userId,
+      ...(typeof data.message === "string" ? { disabled_message: data.message } : {}),
+    };
     const { error } = await context.supabase.from("site_settings").update(update).eq("id", true);
     if (error) throw new Error(error.message);
     return { ok: true };
