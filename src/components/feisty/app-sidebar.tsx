@@ -1,11 +1,13 @@
 import { Link, useRouterState } from "@tanstack/react-router";
+import { useEffect, useState } from "react";
+import { supabase } from "@/integrations/supabase/client";
 import {
   Sidebar, SidebarContent, SidebarGroup, SidebarGroupContent, SidebarGroupLabel,
   SidebarMenu, SidebarMenuButton, SidebarMenuItem, SidebarHeader, SidebarFooter, useSidebar,
 } from "@/components/ui/sidebar";
 import {
   LayoutDashboard, Mail, MessageSquareText, ListTodo, CalendarDays, Sparkles,
-  BookOpen, BarChart3, Users, Workflow, Bell, User, Settings, Zap,
+  BookOpen, BarChart3, Users, Workflow, Bell, User, Settings, Zap, Shield,
 } from "lucide-react";
 
 const groups = [
@@ -48,6 +50,16 @@ export function AppSidebar() {
   const { state } = useSidebar();
   const collapsed = state === "collapsed";
   const pathname = useRouterState({ select: (r) => r.location.pathname });
+  const [isAdmin, setIsAdmin] = useState(false);
+
+  useEffect(() => {
+    (async () => {
+      const { data: u } = await supabase.auth.getUser();
+      if (!u.user) return;
+      const { data } = await supabase.from("user_roles").select("role").eq("user_id", u.user.id).eq("role", "admin");
+      setIsAdmin((data?.length ?? 0) > 0);
+    })();
+  }, []);
 
   return (
     <Sidebar collapsible="icon">
@@ -82,6 +94,23 @@ export function AppSidebar() {
             </SidebarGroupContent>
           </SidebarGroup>
         ))}
+        {isAdmin && (
+          <SidebarGroup>
+            <SidebarGroupLabel>Administration</SidebarGroupLabel>
+            <SidebarGroupContent>
+              <SidebarMenu>
+                <SidebarMenuItem>
+                  <SidebarMenuButton asChild isActive={pathname.startsWith("/admin")}>
+                    <Link to="/admin" className="flex items-center gap-2">
+                      <Shield className="size-4 text-indigo-400" />
+                      <span>Admin Console</span>
+                    </Link>
+                  </SidebarMenuButton>
+                </SidebarMenuItem>
+              </SidebarMenu>
+            </SidebarGroupContent>
+          </SidebarGroup>
+        )}
       </SidebarContent>
       <SidebarFooter>
         {!collapsed && (
